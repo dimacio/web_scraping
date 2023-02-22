@@ -40,7 +40,7 @@ login_button.click()
 time.sleep(10) 
 
 
-web = "https://twitter.com/CFKArgentina/status/1616437338015662084?cxt=HHwWiIDQ4brM3u4sAAAA"
+web = "https://twitter.com/nmrduino/status/1628351274394480640"
 # web = "https://twitter.com/TwitterSupport"
 #Initialize the webdriver
 
