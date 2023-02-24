@@ -45,7 +45,7 @@ web = "https://twitter.com/nmrduino/status/1628351274394480640"
 #Initialize the webdriver
 
 driver.get(web)
-driver.maximize_window()
+
 
 def get_tweet(element):
     try:
@@ -55,6 +55,7 @@ def get_tweet(element):
     except:
         tweet_data = ['user', 'text']
     return tweet_data
+
 
 user_data = []
 text_data = []
@@ -74,21 +75,27 @@ while scrolling:
             text_data.append(" ".join(tweet_list[1].split()))
 
     # Get the initial scroll height
-    last_height = driver.execute_script("return document.body.scrollHeight")
+    last_height = driver.execute_script("return document.documentElement.scrollHeight")
+    
     while True:
         # Scroll down to bottom
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        driver.execute_script("window.scrollTo(0, document.documentElement.scrollHeight);")
         # Wait to load page
-        time.sleep(5)
+        time.sleep(3)
         # Calculate new scroll height and compare it with last scroll height
-        new_height = driver.execute_script("return document.body.scrollHeight")
-        # condition 1
-        if new_height == last_height:  # if the new and last height are equal, it means that there isn't any new page to load, so we stop scrolling
+        new_height = driver.execute_script("return document.documentElement.scrollHeight")
+        print(str(last_height)) 
+        print(str(new_height))
+        print(len(tweet_ids))
+        if len(tweet_ids) > 100 or new_height == last_height :
+
             scrolling = False
-            break     
+            break
         else:
             last_height = new_height
             break
+
+
 driver.quit()
 
 df_tweets = pd.DataFrame({'user': user_data, 'text': text_data})
