@@ -56,7 +56,6 @@ def get_tweet(element):
         tweet_data = ['user', 'text']
     return tweet_data
 
-
 user_data = []
 text_data = []
 tweet_ids = set()
@@ -94,8 +93,6 @@ while scrolling:
         else:
             last_height = new_height
             break
-
-
 driver.quit()
 
 df_tweets = pd.DataFrame({'user': user_data, 'text': text_data})
